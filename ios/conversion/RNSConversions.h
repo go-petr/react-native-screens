@@ -3,7 +3,7 @@
 #if defined(__cplusplus)
 #import <UIKit/UIKit.h>
 #import <folly/dynamic.h>
-#import "RNSEnums.h"
+#import "RNSOrientationConversions.h"
 
 namespace rnscreens::conversion {
 
@@ -11,12 +11,12 @@ namespace rnscreens::conversion {
 id RNSConvertFollyDynamicToId(const folly::dynamic &dyn);
 
 #if !TARGET_OS_TV
-UIInterfaceOrientationMask UIInterfaceOrientationMaskFromRNSOrientation(
-    RNSOrientation orientation);
-
-// Currently unused in stack v5. Maybe remove after stopping support for v4.
-RNSOrientation RNSOrientationFromUIInterfaceOrientationMask(
-    UIInterfaceOrientationMask orientationMask);
+// Kept so that `ios/legacy/RNSScreen.mm` compiles unchanged; new code uses
+// `RNSOrientationFromInterfaceOrientationMask`.
+inline RNSOrientation RNSOrientationFromUIInterfaceOrientationMask(
+    UIInterfaceOrientationMask orientationMask) {
+  return RNSOrientationFromInterfaceOrientationMask(orientationMask);
+}
 #endif // !TARGET_OS_TV
 
 }; // namespace rnscreens::conversion

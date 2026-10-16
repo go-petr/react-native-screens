@@ -1,5 +1,5 @@
-#import "RNSConversions.h"
 #import "RNSEnums.h"
+#import "RNSOrientationConversions.h"
 #import "RNSOrientationProviding.h"
 #import "RNSScreenContainer.h"
 #import "UIViewController+RNScreens.h"
@@ -38,7 +38,7 @@
       return [[UIApplication sharedApplication] supportedInterfaceOrientationsForWindow:self.view.window];
     }
 
-    return rnscreens::conversion::UIInterfaceOrientationMaskFromRNSOrientation(orientation);
+    return RNSInterfaceOrientationMaskFromOrientation(orientation);
   }
 
   return [self reactNativeScreensSupportedInterfaceOrientations];

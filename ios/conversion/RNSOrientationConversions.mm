@@ -1,10 +1,8 @@
-#import "RNSConversions.h"
-#import <React/RCTLog.h>
-
-namespace rnscreens::conversion {
+#import "RNSOrientationConversions.h"
+#import "RNSLog.h"
 
 #if !TARGET_OS_TV
-UIInterfaceOrientationMask UIInterfaceOrientationMaskFromRNSOrientation(RNSOrientation orientation)
+UIInterfaceOrientationMask RNSInterfaceOrientationMaskFromOrientation(RNSOrientation orientation)
 {
   switch (orientation) {
     case RNSOrientationAll:
@@ -24,15 +22,15 @@ UIInterfaceOrientationMask UIInterfaceOrientationMaskFromRNSOrientation(RNSOrien
     case RNSOrientationLandscapeRight:
       return UIInterfaceOrientationMaskLandscapeRight;
     case RNSOrientationInherit:
-      RCTLogError(@"[RNScreens] RNSOrientationInherit does not map directly to any UIInterfaceOrientationMask");
+      RNSLogE(@"[RNScreens] RNSOrientationInherit does not map directly to any UIInterfaceOrientationMask");
       return 0;
     default:
-      RCTLogError(@"[RNScreens] Unsupported orientation");
+      RNSLogE(@"[RNScreens] Unsupported orientation");
       return 0;
   }
 }
 
-RNSOrientation RNSOrientationFromUIInterfaceOrientationMask(UIInterfaceOrientationMask orientationMask)
+RNSOrientation RNSOrientationFromInterfaceOrientationMask(UIInterfaceOrientationMask orientationMask)
 {
   switch (orientationMask) {
     case UIInterfaceOrientationMaskAll:
@@ -52,10 +50,8 @@ RNSOrientation RNSOrientationFromUIInterfaceOrientationMask(UIInterfaceOrientati
     case UIInterfaceOrientationMaskPortrait | UIInterfaceOrientationMaskPortraitUpsideDown:
       return RNSOrientationPortrait;
     default:
-      RCTLogError(@"[RNScreens] Unsupported orientation mask");
+      RNSLogE(@"[RNScreens] Unsupported orientation mask");
       return RNSOrientationInherit;
   }
 }
 #endif // !TARGET_OS_TV
-
-}; // namespace rnscreens::conversion
